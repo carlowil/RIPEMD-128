@@ -2,18 +2,17 @@ pipeline {
 
     agent { dockerfile true }
 
-    environment {
-        NEXUS_CREDENTIALS = credentials('jenkins')
-        VER = '1.0'
-    }
-
     stages {
         stage('Build&Deploy') {
+            environment {
+                NEXUS_CREDENTIALS = credentials('jenkins')
+                VER = '1.1'
+            }
             steps {
-                export nexus_credentials=$NEXUS_CREDENTIALS
-                export ver=$VER
-                sh 'make build'
-                sh 'make publish'
+                sh('export nexus_credentials=$NEXUS_CREDENTIALS')
+                sh('export ver=$VER')
+                sh('make build')
+                sh('make publish')
             }
         }
     }
