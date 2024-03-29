@@ -12,7 +12,7 @@ pipeline {
                 sh('export nexus_credentials=$NEXUS_CREDENTIALS')
                 sh('export ver=$VER')
                 sh('make build')
-                sh('make publish')
+                sh('make VER="$(ver)" NEXUS_CREDS="$(nexus_credentials)" publish')
             }
         }
     }
