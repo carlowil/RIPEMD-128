@@ -9,10 +9,7 @@ pipeline {
                 VER = '1.1'
             }
             steps {
-                sh('export nexus_credentials=$NEXUS_CREDENTIALS &&
-                export ver=$VER &&
-                make build &&
-                make VER="$(ver)" NEXUS_CREDS="$(nexus_credentials)" publish')
+                sh('export nexus_credentials=$NEXUS_CREDENTIALS && export ver=$VER && make build && make VER="$(ver)" NEXUS_CREDS="$(nexus_credentials)" publish')
             }
         }
     }
