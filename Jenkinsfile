@@ -1,27 +1,19 @@
 pipeline {
-    agent {
-        docker { image 'gcc:13.2.0' }
-    }
+
+    agent { dockerfile true }
+
     environment {
         NEXUS_CREDENTIALS = credentials('jenkins')
         VER = '1.0'
     }
+
     stages {
-        stage('Build') {
-            steps {
-                make build  
-            }      
-        }
-        stage('Deploy') {
-            when {
-                expression {
-                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
-                }
-            }
+        stage('Build&Deploy') {
             steps {
                 export nexus_credentials=$NEXUS_CREDENTIALS
                 export ver=$VER
-                make publish
+                sh 'make build'
+                sh 'make publish'
             }
         }
     }
