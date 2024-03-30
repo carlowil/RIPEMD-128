@@ -1,6 +1,11 @@
 pipeline {
 
-    agent { dockerfile true }
+    agent { 
+        dockerfile {
+            filename 'Dockerfile'
+            args '--network=cicd_network'
+        }
+    }
 
     stages {
         stage('Build&Deploy') {
@@ -9,7 +14,6 @@ pipeline {
                 VER = '1.1'
             }
             steps {
-                sh 'printenv'
                 sh 'export nexus_credentials=$NEXUS_CREDENTIALS && export ver=$VER && make build && make VER="${ver}" NEXUS_CREDS="${nexus_credentials}" publish'
             }
         }
