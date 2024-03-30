@@ -3,7 +3,7 @@ pipeline {
     agent { 
         dockerfile {
             filename 'Dockerfile'
-            args '--network=cicd_network'
+            args '--network=jenkins_cicd_network'
         }
     }
 
