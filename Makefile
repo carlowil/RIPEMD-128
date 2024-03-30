@@ -14,10 +14,10 @@ rebuild: clean build
 publish: publish_test publish_prod
 
 publish_test:
-	curl -v -u $(NEXUS_CREDS) --upload-file $(NAME).out http://127.0.0.1:8081/repository/ripemd128-builds/releases/test/$(VER)/$(NAME)-test.out
+	curl -v -u $(NEXUS_CREDS) --upload-file $(NAME).out http://nexus:8081/repository/ripemd128-builds/releases/test/$(VER)/$(NAME)-test.out
 
 publish_prod:
-	curl -v -u $(NEXUS_CREDS) --upload-file $(NAME).out http://127.0.0.1:8081/repository/ripemd128-builds/releases/prod/$(VER)/$(NAME)-prod.out
+	curl -v -u $(NEXUS_CREDS) --upload-file $(NAME).out http://nexus:8081/repository/ripemd128-builds/releases/prod/$(VER)/$(NAME)-prod.out
 
 clean:
 	rm -f *.out
